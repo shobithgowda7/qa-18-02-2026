@@ -5,7 +5,7 @@ pipeline {
 		stage('checkout') {
 			steps {
 			   git branch: 'main',
-				url: https://github.com/shobithgowda7/qa-18-02-2026.git
+				url: 'https://github.com/shobithgowda7/qa-18-02-2026.git'
 			      }
 			}
 		stage('Docker Build') {
