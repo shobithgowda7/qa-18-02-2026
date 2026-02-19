@@ -11,7 +11,6 @@ pipeline {
 		stage('Docker Build') {
 			steps {
 			   sh '''
-			   mvn clean package -DskipTests
 				docker build -t myapp:1.0 .
 			      '''
 			      }
