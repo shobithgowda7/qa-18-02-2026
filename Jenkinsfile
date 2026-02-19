@@ -15,5 +15,26 @@ pipeline {
 			      '''
 			      }
 			}
+		stage('Deploy on EC2') {
+            steps {
+
+                sshagent(credentials: ["${myapp}"]) {
+                    sh '''
+                    ssh -o StrictHostKeyChecking=no $ubuntu@$65.0.181.49 << EOF
+
+                    docker stop myapp || true
+                    docker rm myapp || true
+                    docker rmi $IMAGE_NAME:$IMAGE_TAG || true
+
+                    docker run -d \
+                      --name myapp \
+                      -p 8080:8080 \
+                      $IMAGE_NAME:$IMAGE_TAG
+
+                    EOF
+                    '''
+                }
+            }
+		}
 	}
 }
