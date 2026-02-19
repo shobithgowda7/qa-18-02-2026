@@ -24,12 +24,12 @@ pipeline {
 
                     docker stop myapp || true
                     docker rm myapp || true
-                    docker rmi $IMAGE_NAME:$IMAGE_TAG || true
+                    docker rmi $myapp:$1.0 || true
 
                     docker run -d \
                       --name myapp \
                       -p 8080:8080 \
-                      $IMAGE_NAME:$IMAGE_TAG
+                      $myapp:$1.0
 
                     EOF
                     '''
